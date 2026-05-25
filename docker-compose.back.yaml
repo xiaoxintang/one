@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:17-alpine # 推荐这个
+    container_name: postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: longan
+      POSTGRES_PASSWORD: pOstgres996_
+      POSTGRES_DB: one
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - caddy_web
+
+volumes:
+  postgres_data:
+
+networks:
+  caddy_web:
+    external: true
+    name: caddy_web

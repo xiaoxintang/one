@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: one
     restart: unless-stopped
+    env_file:
+      - .env
     user: "1000:1000"
     networks:
       - caddy_web

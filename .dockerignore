@@ -1,0 +1,13 @@
+# Keep local dependencies and build output out of the Docker context.
+node_modules
+.next
+out
+build
+
+# Keep secrets and local package stores out of images.
+.env*
+.pnpm-store
+
+# Git metadata is not needed inside the image.
+.git
+.gitignore
