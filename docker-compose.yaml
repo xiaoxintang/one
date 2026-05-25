@@ -1,0 +1,15 @@
+services:
+  one:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: one
+    restart: unless-stopped
+    user: "1000:1000"
+    networks:
+      - caddy_web
+
+networks:
+  caddy_web:
+    external: true
+    name: caddy_web
