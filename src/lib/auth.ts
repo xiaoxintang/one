@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
+import { emailOTP } from "better-auth/plugins/email-otp";
 import { prisma } from "./prisma";
 
 export const auth = betterAuth({
@@ -11,5 +12,14 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [nextCookies()],
+  plugins: [
+    emailOTP({
+      disableSignUp: true,
+      // TODO: Replace this development logger with a real email provider.
+      async sendVerificationOTP({ email, otp, type }) {
+        console.log(`[email-otp:${type}] ${email} -> ${otp}`);
+      },
+    }),
+    nextCookies(),
+  ],
 });
